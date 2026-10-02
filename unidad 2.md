@@ -135,3 +135,18 @@ A travez de provedores de servicios de internet (ISP), Organizados en niveles : 
 Puntos de intercambio (XP) Sitios fisicos donde distintos ISP conectan su trafico directamente entre si, en lugar de enviarlo por una ruta mas larga . Reducen latencia y costo de trafico
 
 ### PREGUNTA DE EXAMEN : los ixp sirven para crear rutas mas cortas para el trafico de internet
+
+### Actividad 1 de septiembre
+
+##### Que son los (IXP) ?
+
+puntos de intercambio (IXP) sitios fisicos donde distintos ISP conectan su trafico directamente entre si, en lugar de inviarlo por una ruta mas larga. Reducen latencia y costo de transito.
+
+##### Los IXP crean rutas mas cortas para el trafico del internet?
+si, es una alternativa mas accesible al envio del trafico local de internet al extranjero, ofrecen ,as estabilidad, eficiencia y mejora la calidad, todos estos beneficios a un costo menor.
+
+#### Que es el modelo TCP/IP
+
+modelo de cuatro capas que describe como se comunican los dispositivos en una red social
+
+nacio del proyecto ARPANET en los anos setenta, antes del modelo OSI, por eso es el modelo practico
