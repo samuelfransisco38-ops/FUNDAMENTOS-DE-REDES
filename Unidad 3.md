@@ -118,3 +118,75 @@ Ethernet (IEEE 802.3) es el estandar dominante en el LAN y trabaja en dos capas 
 ARP no verifica quién responde : un atacante envia respuestas ARP falsas para que otros equipos aasocien su MAC con la IP de otro dispositivo , por ejemplo la del router, y asi intercepta el trafico (ataque de intermediario)
 
 se mitiga con inspección dinámica de ARP (DAI) en el switch con entradas ARP estaticas en los equipos críticos .
+
+### Arma la trama Ethernet
+---------------------------------------------
+Nombre: samuel francisco lopez peña
+
+Campo 1
+Dato de ejemplo: 10101010 10101010 10101010 10101010 10101010 10101010 10101010 10101011 (8 bytes)
+Nombre del campo: Preámbulo (y Delimitador de Inicio de Trama o SFD en sus últimos dos bits).
+Para qué sirve: Sincroniza el reloj físico entre el emisor y el receptor antes de transmitir los datos, marcando el inicio exacto de la trama.
+
+Campo 2
+Dato de ejemplo: FFFF.FFFF.FFFF (6 bytes)
+Nombre del campo: Dirección MAC de difusión (Broadcast).
+Para qué sirve: Envía un mensaje de difusión a todos los dispositivos conectados en la misma red local al mismo tiempo.
+
+Campo 3
+Dato de ejemplo: 0001.4321.ABCD (6 bytes)
+Nombre del campo: Dirección MAC (Unicast)
+Para qué sirve: Identificador físico único de la tarjeta de red que indica exactamente qué dispositivo específico envió o debe recibir la trama.
+
+Campo 4
+Dato de ejemplo: 0x0806 (2 bytes)
+Nombre del campo: EtherType
+Para qué sirve: Indica qué protocolo de Capa 3 viaja encapsulado dentro de la trama (por ejemplo, ARP o IPv4) para que el receptor sepa cómo procesarlo.
+
+Campo 5
+Dato de ejemplo: ¿Quién tiene la IP 192.168.1.2? Responde a 192.168.1.1 (entre 46 y 1500 bytes)
+Nombre del campo: Payload / Datos (Paquete ARP)
+Para qué sirve: Es la carga útil o información real que se transporta; en este caso, una consulta del protocolo ARP para asociar una IP con una MAC.
+
+Campo 6
+Dato de ejemplo: 0x3A7F91C2 (4 bytes)
+Nombre del campo: FCS (Frame Check Sequence)
+Para qué sirve: Código de verificación matemática (CRC) que sirve para detectar errores o alteraciones en los datos durante la transmisión y descartar paquetes corruptos.
+
+---------------------------------------------
+### Swich de capa 2 
+decide por donde reenviar usando solo la direccion mac de la trama y su tabla de direcciones MAC; trabaja dentro de una sola red (o una VLAN.)
+### Switch de capa 3
+Ademas de conmutar por MAC , puede enrutar usando la direccion IP del paquete y su tabla de rutas , y conecta varias redes o VLAN entre sí.
+
+### | Switch de Capa 2 | Switch de Capa 3   
+| *¿Qué son?*   | Dispositivo que conecta equipos dentro de una misma red local (LAN) guiándose por direcciones físicas.                                                            | Dispositivo avanzado que funciona como switch y router, capaz de conectar y dirigir tráfico entre distintas redes.                                                                   |
+| *Diferencias* | • Opera solo en la *Capa 2* (Enlace).<br>• Usa direcciones *MAC.<br>• No puede comunicar diferentes VLANs por sí solo.<br>• Hardware más básico y económico. | • Opera en la **Capa 3* (Red) y Capa 2.<br>• Usa direcciones *IP* (además de MAC).<br>• Comunica y enruta tráfico entre VLANs directamente.<br>• Hardware más avanzado y costoso
+### **Fibra Multimodo:**
+Tiene un nucleo mas grueso (50 o 62.5 micras) por donde viajan varios haces de luz a la vez, generados con LED, sirven para distancias cortas, como dentro de un campus o un edificio.
+
+**Monomodo:**
+nucleo delgado, laser, larga distancia y mayor costo
+
+**Multimodo:**
+nucleo grueso, LED, corta distancia y menos costo
+
+**Componentes de un enlace de fibra optica:**
+se necesita dde cable de fibra con conectores en sus extremos y un transceptor (SFP) que convierte la senal electrica en luz: un convertidor de medios une equipos de cobre con la fibra.
+
+**TIpos de transceptores:**
+por. velocidad: SFP 1 Gbps, SFP+ 10 Gbps, SFP28 25 Gbps, QSFP+ 40 Gbps y QSFP28 100 Gbps.
+
+por fibra: SX para multimodo y 
+
+**Ventajas de la fibra optica:**
+ofrece mucho ancho de banda, llega a mayores distancias, es inmune a la interferencia electromagnetica y es mas dificil de intervenir sin ser detectado.
+
+**Donde se usa ?**
+En el backbone de internet, en los cables submarinos, en los enlaces entre edificios de un campus y en los centros de datos.
+
+**UTP frente a fibra optica:**
+
+UTP: senal elecetrica, hasta 100m, economico, sensible a la interferencia
+
+Fibra: pulsos de luz, desde cientos metros hasta decenas de kilometros, mas costosa, inmune a la interferencia.
