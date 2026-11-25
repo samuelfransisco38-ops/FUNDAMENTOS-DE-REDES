@@ -52,36 +52,3 @@ Direcciones IPv4
 una dirección IPv4 tiene 32 bits escritos en 4 octetos decimales separados por puntos, como 192.169.1.10;
 una parte identifica la red y la otra el host.
 
-### DHCP
-El cliente obtiene su configuración en cuatro pasos, DORA: Discover, Offer, Request y
-Acknowledge. El primer mensaje es un broadcast.
-El servidor entrega I, mascara, puerta de enlace y DNS.
-
-Para que sirve DHCP 
-DHCP (protocolo de config dinamica de host )
-es un servicio que asigna dirreccciones IP automaticamente a los equipos de la red
-Evita configurar cada equipo a mano y los confligtos por direcciones duplicadas }
-## Proceso DHCP (DORA)
-
-| Mensaje | Acrónimo | Flujo | Destino (L3 / L2) | Función principal |
-| :--- | :---: | :--- | :--- | :--- |
-| **1. DHCP Discover** | **D** | Cliente $\rightarrow$ Servidor(es) | Broadcast (`255.255.255.255` / `FF:FF:FF:FF:FF:FF`) | El cliente busca servidores DHCP disponibles en la subred al no tener IP configurada (usa origen `0.0.0.0`). |
-| **2. DHCP Offer** | **O** | Servidor $\rightarrow$ Cliente | Unicast o Broadcast | El servidor ofrece una configuración de red (IP disponible, máscara, *gateway*, DNS y tiempo de *lease*). |
-| **3. DHCP Request** | **R** | Cliente $\rightarrow$ Servidor(es) | Broadcast (`255.255.255.255` / `FF:FF:FF:FF:FF:FF`) | El cliente acepta formalmente una oferta (indicando el servidor elegido con la opción 54) y descarta el resto. |
-| **4. DHCP Ack** | **A** | Servidor $\rightarrow$ Cliente | Unicast o Broadcast | El servidor confirma la asignación, registra el *lease* y autoriza al cliente a usar la dirección IP. |
-
-> [!note] Unicast vs. Broadcast en Offer y Ack
-> Aunque el cliente aún no tiene la IP asignada durante el **Offer** y el **Ack**, el servidor suele enviarlos por **Unicast** apuntando a la MAC del cliente y a la IP ofrecida. Si el cliente activa el *Broadcast Flag* (porque su pila TCP/IP no acepta unicast sin interfaz configurada), el servidor responde por **Broadcast**.
-
-### Mensajes adicionales del ciclo de vida
-- **DHCP NAK:** El servidor rechaza la solicitud (ej. renovación de una IP que ya no corresponde a la subred).
-- **DHCP Release:** El cliente libera voluntariamente su IP antes de que expire el *lease*.
-- **DHCP Decline:** El cliente avisa al servidor que la IP ofrecida ya está en uso en la red (detectado vía *Gratuitous ARP*).
-
-
-
-Tiempo de concesión 
-
-La dirrección  se entrega en préstamo por un tiémpo de concesión (laase), no de forma permanente .
-
-El cliente renueva a la mitad del tiempo; en Windows,ipconfig/release libera la dirección e ipconfig/renew pide otra ,
